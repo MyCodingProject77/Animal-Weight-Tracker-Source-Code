@@ -1,0 +1,78 @@
+
+
+      dateTimePicker1_ValueChanged
+
+      dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+
+
+       dateTimePicker1_KeyDown
+
+       if (e.KeyCode == Keys.Back)
+            {
+                dateTimePicker1.CustomFormat = "";
+            }
+
+
+
+     Animal 
+
+       Save Code
+
+
+       con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=AnimalDB;Integrated Security=True");
+            con.Open();
+            SqlCommand cnn = new SqlCommand("insert into animal values(@animalid,@name,@species,@gender,@dob)", con);
+            cnn.Parameters.AddWithValue("@AnimalID", int.Parse(textBox1.Text));
+            cnn.Parameters.AddWithValue("@Name", textBox2.Text);
+            cnn.Parameters.AddWithValue("@Species", textBox3.Text);
+            cnn.Parameters.AddWithValue("@Gender", textBox4.Text);
+            cnn.Parameters.AddWithValue("@Dob", dateTimePicker1.Value);
+            cnn.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Saved Successfully");
+
+
+
+
+
+       Add Code
+
+
+       con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=AnimalDB;Integrated Security=True");
+            con.Open();
+            SqlCommand cnn = new SqlCommand("select * from animal", con);
+            SqlDataAdapter da = new SqlDataAdapter(cnn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+
+
+       Delete Code
+
+       con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=AnimalDB;Integrated Security=True");
+            con.Open();
+            SqlCommand cnn = new SqlCommand("delete animal where animalid=@animalid", con);
+            cnn.Parameters.AddWithValue("@AnimalID", int.Parse(textBox1.Text));
+            
+            cnn.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Deleted Successfully");
+
+
+
+
+       Animal Load Code
+
+
+       con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=AnimalDB;Integrated Security=True");
+            con.Open();
+            SqlCommand cnn = new SqlCommand("select * from animal", con);
+            SqlDataAdapter da = new SqlDataAdapter(cnn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+
+
+       
+
+    
